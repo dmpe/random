@@ -56,7 +56,7 @@ def tweet_search(api, query, max_tweets, max_id, since_id):
     while len(searched_tweets) < max_tweets:
         remaining_tweets = max_tweets - len(searched_tweets)
         try:
-            new_tweets = api.search(q=query, count=remaining_tweets,lang ="en"
+            new_tweets = api.search(q=query, count=remaining_tweets,lang ="en",
                                     since_id=str(since_id),max_id=str(max_id-1))
             print('found',len(new_tweets),'tweets')
             if not new_tweets:
@@ -188,8 +188,9 @@ def write_tweets(tweets, filename):
         RT.append(t.split()[0]=='RT')
     df['RT'] = RT
 
-    engine = create_engine('mysql+pymysql://root:@localhost/sawi_tweets?charset=utf8mb4', encoding='utf8', echo = True)
+    engine = create_engine('mysql+pymysql://root:@localhost/sawi_tweets?charset=utf8mb4', encoding='utf8', echo = False)
     df.to_sql('sawi_tweets_historical', engine, if_exists='append')
+    #df.to_pickle('my_file.pkl')
 
 def main():
     ''' This is a script that continuously searches for tweets
@@ -203,7 +204,7 @@ def main():
     time_limit = 1.5                           # runtime limit in hours
     max_tweets = 100                           # number of tweets per search (will be
                                                # iterated over) - maximum is 100
-    min_days_old, max_days_old = 5, 6          # search limits e.g., from 7 to 8
+    min_days_old, max_days_old = 2, 10         # search limits e.g., from 7 to 8
                                                # gives current weekday from last week,
                                                # min_days_old=0 will search from right now
     # loop over search items,
