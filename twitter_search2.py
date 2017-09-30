@@ -179,7 +179,6 @@ def write_tweets(tweets, filename):
         data['in_reply_to_screen_name'].append(t[20])
 
     df = pd.DataFrame(data)
-    #df.drop_duplicates(inplace=True)
     df['created_at'] = pd.to_datetime(df['created_at'])
     df['user_created_at'] = pd.to_datetime(df['user_created_at'])
 
@@ -189,7 +188,7 @@ def write_tweets(tweets, filename):
     df['RT'] = RT
 
     engine = create_engine('mysql+pymysql://root:@localhost/sawi_tweets?charset=utf8mb4', encoding='utf8', echo = False)
-    df.to_sql('sawi_tweets_historical', engine, if_exists='append')
+    df.to_sql('sawi_tweets_historical', engine, if_exists='append', dtype={'in_reply_to_status_id': sqlalchemy.types.Text, 'in_reply_to_user_id': sqlalchemy.types.Text} )
     #df.to_pickle('my_file.pkl')
 
 def main():
@@ -200,11 +199,11 @@ def main():
 
 
     ''' search variables: '''
-    search_phrases = ['#apple #iphone #iphoneX']
+    search_phrases = ['#apple #iphoneX', 'iphone', 'apple', 'iphoneX', '#iphone']
     time_limit = 1.5                           # runtime limit in hours
     max_tweets = 100                           # number of tweets per search (will be
                                                # iterated over) - maximum is 100
-    min_days_old, max_days_old = 2, 10         # search limits e.g., from 7 to 8
+    min_days_old, max_days_old = 1, 2          # search limits e.g., from 7 to 8
                                                # gives current weekday from last week,
                                                # min_days_old=0 will search from right now
     # loop over search items,
