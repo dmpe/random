@@ -5,11 +5,13 @@ import datetime as dt
 import time
 import os
 import sys
+import sqlalchemy
 import pandas as pd
 from pandas import DataFrame
 from sqlalchemy import *
 from sqlalchemy import schema
 from sqlalchemy.types import *
+import sqlalchemy.schema
 
 '''
 
