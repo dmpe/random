@@ -110,7 +110,7 @@ def main():
         remaining_tweets = max_tweets - len(searched_tweets)
     #, per_page = 99)
         try:
-            new_tweets = api.list_timeline('ChillinQuillen', "Apple" ,since_id=str(since_id),max_id=str(max_id-1), count = 200)
+            new_tweets = api.list_timeline('ChillinQuillen', "Apple" ,since_id=str(since_id),max_id=str(max_id-1))
             print('found',len(new_tweets),'tweets')
             if not new_tweets:
                 print('no tweets found')
