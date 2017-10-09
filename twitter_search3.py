@@ -100,17 +100,17 @@ def main():
     twe = api.list_timeline('ChillinQuillen', "Apple")
     max_id = return_id(twe)
 
-    with open('alpha.json', 'r') as f:
-        lines = f.readlines()
-        since_id = json.loads(lines[-1])['id']
-        print('Searching from the bottom ID in file', since_id, '   ', max_id)
-
+    #with open('alpha.json', 'r') as f:
+    #    lines = f.readlines()
+    #    since_id = json.loads(lines[-1])['id']
+    #    print('Searching from the bottom ID in file', since_id, '   ', max_id)
+# since_id=str(since_id),
     searched_tweets = []
     while len(searched_tweets) < max_tweets:
         remaining_tweets = max_tweets - len(searched_tweets)
     #, per_page = 99)
         try:
-            new_tweets = api.list_timeline('ChillinQuillen', "Apple" ,since_id=str(since_id),max_id=str(max_id-1))
+            new_tweets = api.list_timeline('ChillinQuillen', "Apple" ,max_id=str(max_id-1))
             print('found',len(new_tweets),'tweets')
             if not new_tweets:
                 print('no tweets found')

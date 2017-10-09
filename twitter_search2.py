@@ -192,6 +192,7 @@ def write_tweets(tweets, filename):
     engine = create_engine('mysql+pymysql://root:@localhost/sawi_tweets?charset=utf8mb4', encoding='utf8', echo = False)
     df.to_sql('sawi_tweets_historical', engine, if_exists='append', dtype={'in_reply_to_status_id': sqlalchemy.types.Text, 'in_reply_to_user_id': sqlalchemy.types.Text} )
     #df.to_pickle('my_file.pkl')
+    # 
 
 def main():
     ''' This is a script that continuously searches for tweets
