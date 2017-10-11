@@ -1,6 +1,7 @@
 library(rtweet)
 library(RMariaDB)
-
+library(readr)
+library(dplyr)
 con <- dbConnect(RMariaDB::MariaDB(), dbname = "sawi_tweets", user="root")
 
 appname <- "rwtsafjjkhuouj"
@@ -62,3 +63,15 @@ users_data(tw) %>%
 
 
 
+
+
+
+first_debate <- read_csv("Dropbox/sawi_data/first_debate/first_debate.csv")
+f_s <- first_debate[1:1000,]
+second_debate <- read_csv("Dropbox/sawi_data/second_debate/second_debate.csv")
+s_s <- second_debate[1:1000,]
+third_debate <- read_csv("Dropbox/sawi_data/third_debate/third_debate.csv")
+t_s <- third_debate[1:1000,]
+
+merged <- bind_rows(f_s,s_s,t_s)
+readr::write_csv(merged, "/home/jm/Dropbox/sawi_data/merged_sample_3000_first_third_debate.csv")
