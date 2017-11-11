@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 """
+Authors: https://github.com/DocNow/twarc/blob/master/utils/json2csv.py
 A sample JSON to CSV program. Multivalued JSON properties are space delimited 
 CSV columns. If you'd like it adjusted send a pull request!
 """
