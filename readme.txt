@@ -8,7 +8,7 @@ MEGA Folder for twitter data (~15 GB; Log file ~ 200 MB)
 ====== 1 Step ============
 (After downloading JSONL file) Convert to CSV
 
-uses ";"
+uses ";" as separator
 
 Execute:
 2csv.py xaa.jsonl -o xaa.csv
@@ -51,6 +51,9 @@ fwrite(mt, "xaa_sample_2500.csv", sep = ";")
 Windows OS: 
 type xaa_sample_2500.csv xaa_sample_2500.csv > before_random_sample_5000.csv
 type after_sample_1000.csv xae_sample_1000.csv xaf_sample_2500.csv xag_sample_2500.csv > after_random_sample_5000.csv
+
+type before_sample_2500_a.csv before_sample_2500_b.csv > before_sample_5000.csv
+type xad_sample_1000.csv.csv xae_sample_1000.csv xaf_sample_2500.csv xag_sample_2500.csv> after_sample_5000.csv
 ===========
 
 
