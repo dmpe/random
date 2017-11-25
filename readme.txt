@@ -51,9 +51,10 @@ fwrite(mt, "xaa_sample_2500.csv", sep = ";")
 Windows OS: 
 type xaa_sample_2500.csv xaa_sample_2500.csv > before_random_sample_5000.csv
 type after_sample_1000.csv xae_sample_1000.csv xaf_sample_2500.csv xag_sample_2500.csv > after_random_sample_5000.csv
+xaf_sample_1500.csv 
 
 type before_sample_2500_a.csv before_sample_2500_b.csv > before_sample_5000.csv
-type xad_sample_1000.csv.csv xae_sample_1000.csv xaf_sample_2500.csv xag_sample_2500.csv> after_sample_5000.csv
+type xad_sample_1500.csv xae_sample_2500.csv xag_sample_1000.csv> after_sample_5000.csv
 ===========
 
 
