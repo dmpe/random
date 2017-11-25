@@ -122,17 +122,8 @@ $(document).ready(function () {
 </div>
 
 
-<pre class="r"><code>library(data.table)
-library(readxl)
-library(plyr)
-
-columns_to_use &lt;- c(1:3,6, 7, 9,12:15,19:24,28:30,32,34,35,37)
-a2500 &lt;- seq(from = 1 , to = 400000, by =160)
-b5000 &lt;- seq(from = 1 , to = 400000, by =80)
-c1000 &lt;- seq(from = 1 , to = 400000, by =400)
-d1500 &lt;- seq(from = 1 , to = 400000, by =266)
-Sys.setlocale(&quot;LC_ALL&quot;,&quot;English&quot;)</code></pre>
-<pre><code>## [1] &quot;LC_COLLATE=English_United States.1252;LC_CTYPE=English_United States.1252;LC_MONETARY=English_United States.1252;LC_NUMERIC=C;LC_TIME=English_United States.1252&quot;</code></pre>
+<pre class="r"><code>library(readxl)
+library(plyr)</code></pre>
 <div id="before-debate" class="section level3">
 <h3><span class="header-section-number">0.0.1</span> before debate</h3>
 <pre class="r"><code>before &lt;- read_xlsx(&quot;C:/Users/jm/Documents/sawi/5000 samples/all.xlsx&quot;, sheet = &quot;before&quot;)
