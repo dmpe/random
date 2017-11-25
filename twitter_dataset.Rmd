@@ -1,0 +1,78 @@
+---
+title: "Twitter Debates"
+output:
+  html_document: 
+    number_sections: yes
+    theme: journal
+  html_notebook:
+    code_folding: hide
+    theme: journal
+editor_options:
+  chunk_output_type: console
+---
+
+
+```{r}
+library(data.table)
+library(readxl)
+library(plyr)
+
+columns_to_use <- c(1:3,6, 7, 9,12:15,19:24,28:30,32,34,35,37)
+a2500 <- seq(from = 1 , to = 400000, by =160)
+b5000 <- seq(from = 1 , to = 400000, by =80)
+c1000 <- seq(from = 1 , to = 400000, by =400)
+d1500 <- seq(from = 1 , to = 400000, by =266)
+Sys.setlocale("LC_ALL","English")
+```
+
+### before debate
+
+```{r}
+before <- read_xlsx("C:/Users/jm/Documents/sawi/5000 samples/all.xlsx", sheet = "before")
+
+table(before$tweet_type)
+```
+
+```{r include=FALSE}
+count(before$in_reply_to_user_id)
+count(before$retweet_or_quote_user_id)
+
+summary(before[,c(7,11,17:19,21, 23)])
+```
+
+
+### after debate
+```{r}
+after <- read_xlsx("C:/Users/jm/Documents/sawi/5000 samples/all.xlsx", sheet = "after")
+table(after$tweet_type)
+summary(after[,c(7,11,17:19,21, 23)])
+
+```
+
+### during a
+```{r}
+during_a <- read_xlsx("C:/Users/jm/Documents/sawi/5000 samples/all.xlsx", sheet = "during a")
+table(during_a$tweet_type)
+summary(during_a[,c(7,11,17:19,21, 23)])
+
+```
+
+
+### during b
+```{r}
+during_b <- read_xlsx("C:/Users/jm/Documents/sawi/5000 samples/all.xlsx", sheet = "during b")
+table(during_b$tweet_type)
+summary(during_b[,c(7,11,17:19,21,23)])
+```
+
+
+### during c
+```{r}
+during_c <- read_xlsx("C:/Users/jm/Documents/sawi/5000 samples/all.xlsx", sheet = "during c")
+table(during_c$tweet_type)
+summary(during_c[,c(7,11,17:19,21, 23)])
+```
+
+
+
+
