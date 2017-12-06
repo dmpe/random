@@ -1,4 +1,10 @@
 library(data.table)
+library(readxl)
+library(jsonlite)
+
+
+awd <- stream_in(file("C:/Users/jm/Music/xaa.jsonl",open="r"))
+
 
 columns_to_use <- c(1:3,6, 7, 9,12:15,19:24,28:30,32,34,35,37)
 a2500 <- seq(from = 1 , to = 400000, by =160)
