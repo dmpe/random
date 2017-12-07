@@ -1,12 +1,18 @@
 library(data.table)
-library(readxl)
+library(openxlsx)
 library(jsonlite)
 
 
-awd <- stream_in(file("C:/Users/jm/Music/xaa.jsonl",open="r"))
+awd <- stream_in(file("C:/Users/jm/Music/xaa.jsonl",open="r"), verbose=T)
+nrow(awd)
+out <- lapply(readLines("C:/Users/jm/Music/xaa.jsonl"), fromJSON)
+connn <- file("C:/Users/jm/Music/xaa.jsonl")
 
+test <- readLines(con = connn)
+lapply(test, fromJSON)
+###############################
 
-columns_to_use <- c(1:3,6, 7, 9,12:15,19:24,28:30,32,34,35,37)
+columns_to_use <- c(1:3,6, 7, 9,12:16,19:24,28:30,32,34,35,37)
 a2500 <- seq(from = 1 , to = 400000, by =160)
 b5000 <- seq(from = 1 , to = 400000, by =80)
 c1000 <- seq(from = 1 , to = 400000, by =400)
@@ -19,6 +25,7 @@ mt <- fread("xaa.csv")
 mt <- mt[a2500,..columns_to_use]
 mt$created_at <- as.POSIXct(mt$created_at, format = "%a %b %e %H:%M:%S %z %Y", tz="UTC")
 fwrite(mt, "5000 samples/before_sample_2500_a.csv", sep = ";", col.names = T)
+#openxlsx::write.xlsx(mrrrr, "5000 samples/before_sample_2500_a.xlsx", colNames = T, asTable =T)
 
 #before 
 mta <- fread("xab.csv")
@@ -52,10 +59,10 @@ mt <- mt[a2500,..columns_to_use]
 mt$created_at <- as.POSIXct(mt$created_at, format = "%a %b %e %H:%M:%S %z %Y", tz="EST")
 fwrite(mt, "5000 samples/xae_sample_2500.csv", sep = ";", col.names = F, dateTimeAs = "write.csv")
 
-#mt <- fread("xaf.csv")
-#mt <- mt[sample(.N, 1500),..columns_to_use]
-#mt$created_at <- as.POSIXct(mt$created_at, format = "%a %b %e %H:%M:%S %z %Y", tz="EST")
-#fwrite(mt, "5000 samples/xaf_sample_1500.csv", sep = ";", col.names = F, dateTimeAs = "write.csv")
+mt <- fread("xaf.csv")
+mt <- mt[sample(.N, 1500),..columns_to_use]
+mt$created_at <- as.POSIXct(mt$created_at, format = "%a %b %e %H:%M:%S %z %Y", tz="EST")
+fwrite(mt, "5000 samples/xaf_sample_1500.csv", sep = ";", col.names = F, dateTimeAs = "write.csv")
 
 mt <- fread("xag.csv")
 mt <- mt[sample(.N, 1000),..columns_to_use]

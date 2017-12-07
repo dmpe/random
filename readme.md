@@ -22,7 +22,7 @@ uses ";" as separator
 
 Execute:
 
-2csv.py xaa.jsonl -o xaa.csv
+python 2jsonl.py xaa.jsonl -o xaa.csv
 
 2csv.py xae -o xae.csv
 
