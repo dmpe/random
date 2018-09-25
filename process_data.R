@@ -14,8 +14,8 @@ library(jsonlite)
 
 ###############################
 # This file needs to be considered as an example. 
-# Here it reads the WHOLE 250MB CSV file and then does the sample/split
-# Another approach is to use shuf bash command
+# Here, it reads the WHOLE 250MB CSV file and only then creates the sample with pre-processing steps
+# Another approach is to use shuf bash command and load already much smaller file that would be processed.
 ###############################
 
 # pics only necessary columns that are worth the information
