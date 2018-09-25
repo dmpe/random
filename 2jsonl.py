@@ -171,7 +171,7 @@ def get_row(t, extra_fields=None):
 				row.append(extra_field(t, field))
 		return row
 
-
+##  get the better text, without emoji
 def text(t):
 	if 'retweeted_status' in t and t['retweeted_status']:
 		real_text = (t['retweeted_status']['full_text']).replace('\n', ' ')

@@ -1,5 +1,5 @@
 ---
-title: "Twitter Debates"
+title: "Tweets from the first Presidential Debate"
 output:
   html_document: 
     number_sections: yes
@@ -17,7 +17,7 @@ library(readxl)
 library(plyr)
 ```
 
-### before debate
+# Before the debate
 
 ```{r}
 before <- read_xlsx("C:/Users/jm/Documents/sawi/5000 samples/all.xlsx", sheet = "before")
@@ -32,16 +32,7 @@ count(before$retweet_or_quote_user_id)
 summary(before[,c(7,11,17:19,21, 23)])
 ```
 
-
-### after debate
-```{r}
-after <- read_xlsx("C:/Users/jm/Documents/sawi/5000 samples/all.xlsx", sheet = "after")
-table(after$tweet_type)
-summary(after[,c(7,11,17:19,21, 23)])
-
-```
-
-### during a
+# During - sample A
 ```{r}
 during_a <- read_xlsx("C:/Users/jm/Documents/sawi/5000 samples/all.xlsx", sheet = "during a")
 table(during_a$tweet_type)
@@ -49,22 +40,24 @@ summary(during_a[,c(7,11,17:19,21, 23)])
 
 ```
 
-
-### during b
+# During - sample B
 ```{r}
 during_b <- read_xlsx("C:/Users/jm/Documents/sawi/5000 samples/all.xlsx", sheet = "during b")
 table(during_b$tweet_type)
 summary(during_b[,c(7,11,17:19,21,23)])
 ```
 
-
-### during c
+# During - sample C
 ```{r}
 during_c <- read_xlsx("C:/Users/jm/Documents/sawi/5000 samples/all.xlsx", sheet = "during c")
 table(during_c$tweet_type)
 summary(during_c[,c(7,11,17:19,21, 23)])
 ```
 
+# After the debate
+```{r}
+after <- read_xlsx("C:/Users/jm/Documents/sawi/5000 samples/all.xlsx", sheet = "after")
+table(after$tweet_type)
+summary(after[,c(7,11,17:19,21, 23)])
 
-
-
+```

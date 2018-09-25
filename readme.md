@@ -1,22 +1,36 @@
-## 2016 USA Presidential debate Twitter Sample
+# 2016 USA Presidential debate - Preparition of a sample of tweets
 
-<http://rpubs.com/F789GH/USAPresidentialTweets>
+## Goal:
 
-**Data Source:** <https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi%3A10.7910%2FDVN%2FPDI7IN>
+Being a student research assistant for [SAWI]() course during autumn 2017/2018 at FAU, the task was to prepare `2016 USA Presidential debate` dataset that could have been passed to the students, for their analysis.
 
-(for myself: see MEGA folder for the whole twitter dataset (~15 GB; Log file ~ 200 MB)
+**Data Source in question:** <https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi%3A10.7910%2FDVN%2FPDI7IN>
 
-### Tasks:
-Gather 5 samples, each of 5000 tweets
+**Specifically**, the first presidential debate in the USA that was held in 2016.
+<https://dataverse.harvard.edu/file.xhtml?persistentId=doi:10.7910/DVN/PDI7IN/AGYMSC&version=3.0>. See its `Readme` file as well.
 
-1 sample before debate began
+### Note for myself 
+See that [MEGA folder](https://mega.nz/#F!qxNThASR) for the whole twitter dataset (~15 GB; Log file ~ 200 MB). You have to ask me for the key to see files!
 
-3 samples during the debate
+## Tasks:
 
-1 sample after debate
+The final idea was to have 5 groups and provide each of them slightly different dataset according to when people have tweeted about it, i.e. wheather it was before, during or after the debate. 
 
-### 1 Step
-(After downloading JSONL file) Convert to CSV
+In summary, the objective would be to gather 5 samples, each of 5000 tweets:
+
+- 1 sample **before** the debate has began
+
+- 3 samples **during** the debate
+
+- 1 sample **after** the debate
+
+<http://rpubs.com/F789GH/USAPresidentialTweets> shows some statistics for the final CSV samples. See `RPubs` folder for more.
+
+### 1. Step - Get data
+
+Download tweets because that `.txt` file will just contain the Tweet IDs. Not the whole content of the tweet itself. 
+
+### 2. Step - Convert to CSV
 
 uses ";" as separator
 
@@ -75,5 +89,11 @@ xaf_sample_1500.csv
 
 type before_sample_2500_a.csv before_sample_2500_b.csv > before_sample_5000.csv
 type xad_sample_1500.csv xae_sample_2500.csv xag_sample_1000.csv> after_sample_5000.csv
+
+
+### Some research
+
+1. Download tweets manually, looking for tweets that include specific `#hastags`
+
 
 
