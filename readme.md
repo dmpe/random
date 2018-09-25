@@ -2,7 +2,7 @@
 
 ## Goal:
 
-Being a student research assistant for [SAWI]() course during autumn 2017/2018 at FAU, the task was to prepare `2016 USA Presidential debate` dataset that could have been passed to the students, for their analysis.
+Being a student research assistant for [SAWI](http://www.wi2.fau.de/teaching/master/master-courses/sawi/) course during autumn 2017/2018 at FAU, the task was to prepare `2016 USA Presidential debate` dataset that could have been passed to the students, for their analysis.
 
 **Data Source in question:** <https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi%3A10.7910%2FDVN%2FPDI7IN>
 
@@ -30,29 +30,76 @@ In summary, the objective would be to gather 5 samples, each of 5000 tweets:
 
 Download tweets because that `.txt` file will just contain the Tweet IDs. Not the whole content of the tweet itself. 
 
+We have used TWARC from <https://github.com/DocNow/twarc>. 
+
+#### 1.1 Configure
+
+First, get Twitter DEV API Keys from <https://developer.twitter.com/en/apply-for-access>:
+Then, place them into:
+```
+twarc configure
+```
+
+After that, 
+```
+twarc hydrate first-debate.txt > all_first_tweets.jsonl
+```
+
+It takes hours...
+
+### 1.5 Step - Split data into manageble junks
+
+Why? Well, because the original 13.5 GB `jsonl` file will be hard to read in any programm. So dont try R + limited RAM!
+You could use for that <https://stedolan.github.io/jq/>. 
+
+Alternatively, you could split txt file into multiple files and then apply previous `twarc` command.
+
+Something like
+
+```
+split -b 1M -d  first-debate.txt file 
+```
+
 ### 2. Step - Convert to CSV
 
-uses ";" as separator
+Why? Because jsonl files are hard to work with. 
 
-Execute:
+Execute for each file, depending on your PC and twarc itself:
 
 ```
 python 2jsonl.py xaa.jsonl -o xaa.csv
-2csv.py xae -o xae.csv
+
+OR
+
+python3 2jsonl.py xaa.jsonl -o xaa.csv
 ```
 
+You can also try:
+
+```
+python 2csv_original.py xae -o xae.csv
+```
+
+CSV delimiter will be ";"
+
+Overall, this will create very large CSV files at around 250 MB. And we still need samples of those.
+
 ### 2 Step
-Analyse Data ;)
+Analyse Data in order to understand time when tweets have been published ;)
 
-R' data.table
+Use R script `process_data.R` and then also 
 
+```
+head -n 5 xae.csv
+```
+
+The outcome:
+```
 xaa -> before debate: from 12 PM EST till 18:30 EST
 
 xab -> before debate: from 18:30 EST till 21:00 EST 
 
 (first debate was from 21:00 till 22:35)
-
-head -n5 
 
 xac -> during debate: from 20:47 EST till 22:40 EST
 
@@ -63,7 +110,7 @@ xae -> after  debate: from 01:20 AM EST till 06:20 AM EST
 xaf -> after  debate: from 06:20 AM EST till 09:40 AM EST
 
 xag ->  .... (rest)
-
+```
 
 ### pure (semi-)random sample
 
@@ -84,16 +131,21 @@ fwrite(mt, "xaa_sample_2500.csv", sep = ";")
 **Windows OS:** 
 
 type xaa_sample_2500.csv xaa_sample_2500.csv > before_random_sample_5000.csv
+
+
+type xad_sample_1500.csv xae_sample_2500.csv xag_sample_1000.csv> after_sample_5000.csv
+
 type after_sample_1000.csv xae_sample_1000.csv xaf_sample_2500.csv xag_sample_2500.csv > after_random_sample_5000.csv
 xaf_sample_1500.csv 
 
 type before_sample_2500_a.csv before_sample_2500_b.csv > before_sample_5000.csv
-type xad_sample_1500.csv xae_sample_2500.csv xag_sample_1000.csv> after_sample_5000.csv
 
 
-### Some research
 
-1. Download tweets manually, looking for tweets that include specific `#hastags`
+### Some research before
+
+Download tweets manually, looking for tweets that include specific `#hastags`. Then store them in the database from which you can then query them. See that folder and Python Notebooks.
+
 
 
 

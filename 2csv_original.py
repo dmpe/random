@@ -2,6 +2,7 @@
 
 """
 Authors: https://github.com/DocNow/twarc/blob/master/utils/json2csv.py
+Likely based on https://github.com/DocNow/twarc/blob/5ab014dc437707367806a97c52c0b48c8449c672/utils/json2csv.py
 A sample JSON to CSV program. Multivalued JSON properties are space delimited 
 CSV columns. If you'd like it adjusted send a pull request!
 """
