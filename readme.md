@@ -47,12 +47,12 @@ twarc hydrate first-debate.txt > all_first_tweets.jsonl
 
 It takes hours...
 
-### 1.5 Step - Split data into manageble junks
+#### 1.5 Step - Split data into manageble junks
 
 Why? Well, because the original 13.5 GB `jsonl` file will be hard to read in any programm. So dont try R + limited RAM!
 You could use for that <https://stedolan.github.io/jq/>. 
 
-Alternatively, you could split txt file into multiple files and then apply previous `twarc` command.
+**Alternatively**, you could split txt file into multiple files and then apply previous `twarc` command.
 
 Something like
 
@@ -84,10 +84,13 @@ CSV delimiter will be ";"
 
 Overall, this will create very large CSV files at around 250 MB. And we still need samples of those.
 
-### 2 Step
+Again, alternatively, you can take one large JSONL file and convert it to one large CSV file which you can later split.
+
+### 3. Step
+
 Analyse Data in order to understand time when tweets have been published ;)
 
-Use R script `process_data.R` and then also 
+E.g. 
 
 ```
 head -n 5 xae.csv
@@ -111,38 +114,42 @@ xaf -> after  debate: from 06:20 AM EST till 09:40 AM EST
 
 xag ->  .... (rest)
 ```
+### 4. Step - Split large CSVs into smaller samples
 
-### pure (semi-)random sample
+Use R script `process_data.R` to apply proper formatting.
 
-**Unix:**
-
-xaa + xab: shuf -n 2500 xab.csv > xab_sample_2500.csv
-
--------> Merge 2 files
-
-(see process_data.R)
+You can also go faster (but not more reliable), where you would on **Ubuntu** (and in case of xa{a,b}.csv 250MB files), execute:
 
 ```
-mt <- fread("xaa.csv")
+shuf -n 2500 xaa.csv > xaa_sample_2500.csv
+shuf -n 2500 xab.csv > xab_sample_2500.csv
+```
+
+Having those, only then you use `process_data.R` which contains something along the lines
+
+```
+mt <- fread("xaa.csv") # or xaa_sample_2500.csv directly
 mt <- mt[sample(.N, 2500)]
 fwrite(mt, "xaa_sample_2500.csv", sep = ";")
 ```
 
-**Windows OS:** 
+### 5. Step - In any case, you need to combine files from previous R scipt
 
-type xaa_sample_2500.csv xaa_sample_2500.csv > before_random_sample_5000.csv
+On **Windows**, type commands like:
 
-
+```
 type xad_sample_1500.csv xae_sample_2500.csv xag_sample_1000.csv> after_sample_5000.csv
+
+type xaa_sample_2500.csv xab_sample_2500.csv > before_random_sample_5000.csv
 
 type after_sample_1000.csv xae_sample_1000.csv xaf_sample_2500.csv xag_sample_2500.csv > after_random_sample_5000.csv
 xaf_sample_1500.csv 
 
+# combine 2500*2 tweets from the time before the debate into 5000 pieces
 type before_sample_2500_a.csv before_sample_2500_b.csv > before_sample_5000.csv
+```
 
-
-
-### Some research before
+## Some research before
 
 Download tweets manually, looking for tweets that include specific `#hastags`. Then store them in the database from which you can then query them. See that folder and Python Notebooks.
 

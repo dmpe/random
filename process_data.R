@@ -2,13 +2,20 @@ library(data.table)
 library(openxlsx)
 library(jsonlite)
 
+###############################
 #awd <- stream_in(file("C:/Users/jm/Music/xaa.jsonl",open="r"), verbose=T)
 #nrow(awd)
 #out <- lapply(readLines("C:/Users/jm/Music/xaa.jsonl"), fromJSON)
 #connn <- file("C:/Users/jm/Music/xaa.jsonl")
-
 #test <- readLines(con = connn)
 #lapply(test, fromJSON)
+###############################
+
+
+###############################
+# This file needs to be considered as an example. 
+# Here it reads the WHOLE 250MB CSV file and then does the sample/split
+# Another approach is to use shuf bash command
 ###############################
 
 # pics only necessary columns that are worth the information
@@ -21,10 +28,10 @@ d1500 <- seq(from = 1 , to = 400000, by =266)
 Sys.setlocale("LC_ALL","English")
 
 # before A
-mt <- fread("xaa.csv")
-mt <- mt[a2500,..columns_to_use]
-mt$created_at <- as.POSIXct(mt$created_at, format = "%a %b %e %H:%M:%S %z %Y", tz="EST")
-fwrite(mt, "5000 samples/before_sample_2500_a.csv", sep = ";", col.names = T, dateTimeAs = "write.csv")
+mt <- fread("xaa.csv") # loads the whole 250 MB file
+mt <- mt[a2500,..columns_to_use] # essentially a subset
+mt$created_at <- as.POSIXct(mt$created_at, format = "%a %b %e %H:%M:%S %z %Y", tz="EST") # prepare time to have GMT+1
+fwrite(mt, "5000 samples/before_sample_2500_a.csv", sep = ";", col.names = T, dateTimeAs = "write.csv") # write the sample in CSV
 #openxlsx::write.xlsx(mrrrr, "5000 samples/before_sample_2500_a.xlsx", colNames = T, asTable =T)
 
 # before B
