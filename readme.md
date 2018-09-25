@@ -22,9 +22,10 @@ uses ";" as separator
 
 Execute:
 
+```
 python 2jsonl.py xaa.jsonl -o xaa.csv
-
 2csv.py xae -o xae.csv
+```
 
 ### 2 Step
 Analyse Data ;)
@@ -47,7 +48,7 @@ xae -> after  debate: from 01:20 AM EST till 06:20 AM EST
 
 xaf -> after  debate: from 06:20 AM EST till 09:40 AM EST
 
-xag ->  ....
+xag ->  .... (rest)
 
 
 ### pure (semi-)random sample
