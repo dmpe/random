@@ -27,14 +27,13 @@ d1500 <- seq(from = 1 , to = 400000, by =266)
 
 Sys.setlocale("LC_ALL","English")
 
-# before A
+# before A + B
 mt <- fread("xaa.csv") # loads the whole 250 MB file
 mt <- mt[a2500,..columns_to_use] # essentially a subset
 mt$created_at <- as.POSIXct(mt$created_at, format = "%a %b %e %H:%M:%S %z %Y", tz="EST") # prepare time to have GMT+1
 fwrite(mt, "5000 samples/before_sample_2500_a.csv", sep = ";", col.names = T, dateTimeAs = "write.csv") # write the sample in CSV
 #openxlsx::write.xlsx(mrrrr, "5000 samples/before_sample_2500_a.xlsx", colNames = T, asTable =T)
 
-# before B
 mta <- fread("xab.csv")
 mta <- mta[a2500,..columns_to_use]
 mta$created_at <- as.POSIXct(mta$created_at, format = "%a %b %e %H:%M:%S %z %Y", tz="EST")

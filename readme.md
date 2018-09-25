@@ -52,7 +52,7 @@ It takes hours...
 Why? Well, because the original 13.5 GB `jsonl` file will be hard to read in any programm. So dont try R + limited RAM!
 You could use for that <https://stedolan.github.io/jq/>. 
 
-**Alternatively**, you could split txt file into multiple files and then apply previous `twarc` command.
+**Alternatively**, you could split txt file into multiple files and **only** then apply previous `twarc` command.
 
 Something like
 
@@ -64,7 +64,7 @@ split -b 1M -d  first-debate.txt file
 
 Why? Because jsonl files are hard to work with. 
 
-Execute for each file, depending on your PC and twarc itself:
+Execute for each file, depending on your PC and [twarc](https://github.com/DocNow/twarc/blob/master/utils/json2csv.py) itself:
 
 ```
 python 2jsonl.py xaa.jsonl -o xaa.csv
@@ -82,9 +82,9 @@ python 2csv_original.py xae -o xae.csv
 
 CSV delimiter will be ";"
 
-Overall, this will create very large CSV files at around 250 MB. And we still need samples of those.
+Overall, this will create very large CSV files at around 250 MB. And we **still need** samples of those.
 
-Again, alternatively, you can take one large JSONL file and convert it to one large CSV file which you can later split.
+Again, **alternatively**, you can take one large JSONL file and convert it to one large CSV file which you can later split as well.
 
 ### 3. Step
 
@@ -114,21 +114,22 @@ xaf -> after  debate: from 06:20 AM EST till 09:40 AM EST
 
 xag ->  .... (rest)
 ```
+
 ### 4. Step - Split large CSVs into smaller samples
 
 Use R script `process_data.R` to apply proper formatting.
 
-You can also go faster (but not more reliable), where you would on **Ubuntu** (and in case of xa{a,b}.csv 250MB files), execute:
+You can also go faster (but not more reliable), where in case of xa{a,b}.csv 250MB files, you could execute via bash:
 
 ```
 shuf -n 2500 xaa.csv > xaa_sample_2500.csv
 shuf -n 2500 xab.csv > xab_sample_2500.csv
 ```
 
-Having those, only then you use `process_data.R` which contains something along the lines
+Having those, only then you would use `process_data.R` which contains something along the lines:
 
 ```
-mt <- fread("xaa.csv") # or xaa_sample_2500.csv directly
+mt <- fread("xaa.csv") # or xaa_sample_2500.csv directly - depending on previous steps
 mt <- mt[sample(.N, 2500)]
 fwrite(mt, "xaa_sample_2500.csv", sep = ";")
 ```
